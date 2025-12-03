@@ -172,11 +172,11 @@ Rode a aplicação com Ctrl + F5 e acesse Acesse http://localhost:8400 para veri
 
 ## 5. Configurando os Perfis de Usuário
 
-O sistema de blog utiliza dois perfis de usuário diferentes dos existentes. O arquivo `util/perfis.py` do projeto original contém os perfis ADMIN, CLIENTE e VENDEDOR. **Você deve SUBSTITUIR os perfis CLIENTE e VENDEDOR por AUTOR e LEITOR**:
+O sistema de blog utiliza dois perfis de usuário diferentes dos existentes. O arquivo `util/perfis.py` do projeto original contém os perfis ADMIN, AUTOR e LEITOR. **Você deve SUBSTITUIR os perfis AUTOR e LEITOR por AUTOR e LEITOR**:
 
 ### Arquivo: `util/perfis.py`
 
-Localize o enum `Perfil` e **substitua** os perfis `CLIENTE` e `VENDEDOR` por `AUTOR` e `LEITOR`. O arquivo deve ficar assim:
+Localize o enum `Perfil` e **substitua** os perfis `AUTOR` e `LEITOR` por `AUTOR` e `LEITOR`. O arquivo deve ficar assim:
 
 ```python
 """
@@ -227,7 +227,7 @@ class Perfil(EnumEntidade):
 
 ### 5.1. Atualizando o UsuarioLogado
 
-O arquivo `model/usuario_logado_model.py` contém o dataclass `UsuarioLogado` que representa o usuário autenticado. Como substituímos os perfis CLIENTE e VENDEDOR, você deve **substituir os métodos `is_cliente()` e `is_vendedor()` por `is_autor()` e `is_leitor()`**:
+O arquivo `model/usuario_logado_model.py` contém o dataclass `UsuarioLogado` que representa o usuário autenticado. Como substituímos os perfis AUTOR e LEITOR, você deve **substituir os métodos `is_autor()` e `is_leitor()` por `is_autor()` e `is_leitor()`**:
 
 ```python
     def is_autor(self) -> bool:
@@ -239,7 +239,7 @@ O arquivo `model/usuario_logado_model.py` contém o dataclass `UsuarioLogado` qu
         return self.perfil == Perfil.LEITOR.value
 ```
 
-> **Nota:** O método `is_admin()` deve ser mantido. Remova apenas `is_cliente()` e `is_vendedor()`.
+> **Nota:** O método `is_admin()` deve ser mantido. Remova apenas `is_autor()` e `is_leitor()`.
 
 ### 5.3. Substituindo os Perfis Antigos Pelos Novos no Restante do Projeto
 
@@ -247,12 +247,12 @@ Clique na ferramenta de busca do VS Code (Ctrl + Shift + F), ative a sensibilida
 
 | Buscar               | Substituir por      |
 |----------------------|---------------------|
-| `CLIENTE`            | `AUTOR`             |
-| `VENDEDOR`           | `LEITOR`            |
-| `Cliente`            | `Autor`             |
-| `Vendedor`           | `Leitor`            |
-| `cliente`            | `autor`             |
-| `vendedor`           | `leitor`            |
+| `AUTOR`            | `AUTOR`             |
+| `LEITOR`           | `LEITOR`            |
+| `Autor`            | `Autor`             |
+| `Leitor`           | `Leitor`            |
+| `autor`            | `autor`             |
+| `leitor`           | `leitor`            |
 
 **ATENÇÃO:** a função obter_identificador_cliente nao deve ser renomeada! Ela está nos arquivos rate_limiter.py e rate_limit_decorator.py.
 ---

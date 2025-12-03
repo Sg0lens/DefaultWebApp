@@ -366,7 +366,7 @@ async def post_esqueci_senha(request: Request, email: str = Form()):
         raise ErroValidacaoFormulario(
             validation_error=e,
             template_path="auth/esqueci_senha.html",
-            dados_formulario=dados_formulario,
+            dados_formulario= dados_formulario,
             campo_padrao="email",
         )
 
